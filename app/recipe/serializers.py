@@ -11,7 +11,7 @@ from core.models import (
 
 
 class IngredientSerializer(serializers.ModelSerializer):
-    """"Serializer for ingredients."""
+    """Serializer for ingredients."""
 
     class Meta:
         model = Ingredient
@@ -55,7 +55,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         """Handle getting or  creating ingredients as needed."""
         auth_user = self.context['request'].user
         for ingredient in ingredients:
-            ingredient_obj, create = Ingredient.objects.get_or_create(
+            ingredient_obj, created = Ingredient.objects.get_or_create(
                 user=auth_user,
                 **ingredient,
             )

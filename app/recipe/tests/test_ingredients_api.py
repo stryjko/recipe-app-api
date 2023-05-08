@@ -12,6 +12,7 @@ from core.models import Ingredient
 
 from recipe.serializers import IngredientSerializer
 
+
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
 
@@ -25,7 +26,7 @@ def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-class PublicIngrediensApiTests(TestCase):
+class PublicIngredientApiTests(TestCase):
     """Test unauthenticated API requests."""
 
     def setUp(self):
@@ -39,7 +40,7 @@ class PublicIngrediensApiTests(TestCase):
 
 
 class PrivateIngredientsApiTests(TestCase):
-    """Test unauthenticated API requests."""
+    """Test authenticated API requests."""
 
     def setUp(self):
         self.user = create_user()
@@ -84,7 +85,7 @@ class PrivateIngredientsApiTests(TestCase):
         self.assertEqual(ingredient.name, payload['name'])
 
     def test_delete_ingredient(self):
-        """Test deleting an ingredient"""
+        """Test deleting an ingredient."""
         ingredient = Ingredient.objects.create(user=self.user, name='Lettuce')
 
         url = detail_url(ingredient.id)
